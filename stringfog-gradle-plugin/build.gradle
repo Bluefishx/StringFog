@@ -5,7 +5,6 @@ plugins {
 
 dependencies {
     implementation gradleApi()
-    implementation localGroovy()
     implementation 'com.android.tools.build:gradle:8.10.1'
     implementation project(':stringfog-core')
     implementation project(':stringfog-interface')
@@ -29,14 +28,13 @@ tasks.withType(Jar){
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
 
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = targetCompatibility
-    }
+
+// NEW
+kotlin {
+    jvmToolchain(17)
 }
+
 
 apply from: '../maven_local.gradle'
 
