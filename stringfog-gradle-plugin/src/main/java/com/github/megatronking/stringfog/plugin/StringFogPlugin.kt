@@ -68,7 +68,7 @@ class StringFogPlugin : Plugin<Project> {
                 )
             }
             variant.instrumentation.setAsmFramesComputationMode(
-                FramesComputationMode.COPY_FRAMES
+                FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS
             )
 
             // Register source generating task using the NEW Variant API
