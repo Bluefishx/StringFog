@@ -10,6 +10,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.objectweb.asm.ClassVisitor
 import java.io.File
+import kotlin.text.get
 
 abstract class StringFogTransform : AsmClassVisitorFactory<StringFogInstrumentationParams> {
 
@@ -26,7 +27,9 @@ abstract class StringFogTransform : AsmClassVisitorFactory<StringFogInstrumentat
     }
 
     override fun isInstrumentable(classData: ClassData): Boolean {
-        return true
+        val fogPackages = parameters.get().extension.fogPackages
+        if (fogPackages.isEmpty()) return true
+        return fogPackages.any { classData.className.startsWith("$it.") }
     }
 
 }
